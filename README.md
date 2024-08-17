@@ -38,7 +38,7 @@ This project uses the MIT License.
 - 2024-10-30: Add a new logo and background image
 
 ## Screenshots
- <style>
+<style>
         .container {
             display: flex;
             justify-content: space-around; /* Distribui espaço uniformemente */
@@ -49,7 +49,7 @@ This project uses the MIT License.
             max-width: 100%; /* Garante que as imagens não ultrapassem o tamanho do contêiner */
             height: auto; /* Mantém a proporção das imagens */
         }
-    </style>
+</style>
 
 <div class = "container">
     <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Main_Page.png?raw=true"/></br>
