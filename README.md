@@ -40,8 +40,8 @@ This project uses the MIT License.
 ## Screenshots
 
 <div style="display: flex; justify-content: space-around; align-items: center; gap: 10px;">
-    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Main_Page.png?raw=true"/></br>
-    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Adding_Task.png?raw=true"/></br>
-    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Current_Tasks.png?raw=true"/></br>
-    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Completed_Tasks.png?raw=true"/></br>
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Main_Page.png?raw=true" style="max-width: 30%; height: auto;"/>
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Adding_Task.png?raw=true" style="max-width: 30%; height: auto;"/>
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Current_Tasks.png?raw=true" style="max-width: 30%; height: auto;"/>
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Completed_Tasks.png?raw=true" style="max-width: 30%; height: auto;"/>
 </div>
