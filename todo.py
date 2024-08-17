@@ -26,6 +26,15 @@ class ToDo:
         self.main_Page()
 
     def checked(self, e):
+        """
+        Updates the task status in the database based on the checkbox event.
+
+        Parameters:
+            e (Event): The event triggered by the checkbox.
+
+        Returns:
+            None
+        """
         is_checked = e.control.value
         label = e.control.label
         
@@ -70,6 +79,16 @@ class ToDo:
         )
 
     def db_execute(self, query, params = []):
+        """
+        Execute a SQL query on the todo.db database.
+
+        Parameters:
+            query (str): The SQL query to be executed.
+            params (list): A list of parameters to be used in the query.
+
+        Returns:
+            list: A list of rows returned by the query.
+        """
         with sqlite3.connect('todo.db') as conn:
             cur = conn.cursor()
             cur.execute(query, params)
@@ -77,15 +96,43 @@ class ToDo:
             return cur.fetchall()
     
     def set_value(self, e):
+        """
+        Sets the task value based on the event triggered by the control.
+
+        Parameters:
+            e (Event): The event triggered by the control.
+
+        Returns:
+            None
+        """
         self.task = e.control.value
 
     def update_task_list(self):
+        """
+        Updates the task list in the application.
+
+        Parameters:
+            self (ToDo): The instance of the ToDo class.
+
+        Returns:
+            None
+        """
         tasks = self.tasks_container()
         self.Page.controls.pop()
         self.Page.add(tasks)
         self.Page.update()
         
     def add_task(self, e, input_task):
+        """
+        Adds a new task to the task list.
+
+        Parameters:
+            e (Event): The event triggered by the control.
+            input_task (Control): The input task control.
+
+        Returns:
+            None
+        """
         task_name = self.task
         status = 'incomplete'
         
@@ -99,6 +146,15 @@ class ToDo:
             self.update_task_list()
     
     def tabs_changed(self, e):
+        """
+        Updates the task list based on the selected tab.
+
+        Parameters:
+            e (Event): The event triggered by the control.
+
+        Returns:
+            None
+        """
         if e.control.selected_index == 0:
             self.results = self.db_execute('SELECT * FROM tasks')
             self.view = 'all'
