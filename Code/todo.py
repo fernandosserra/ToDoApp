@@ -89,7 +89,7 @@ class ToDo:
         Returns:
             list: A list of rows returned by the query.
         """
-        with sqlite3.connect('todo.db') as conn:
+        with sqlite3.connect(r'D:\Projetos-Fernando\Python\ToDoApp\Database\todo.db') as conn:
             cur = conn.cursor()
             cur.execute(query, params)
             conn.commit()
