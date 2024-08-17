@@ -30,7 +30,7 @@ The following technologies were used:
 ## Using
 
 ## License
-This project uses the MIT License.
+This project uses the [MIT License](https://github.com/fernandosserra/ToDoApp/blob/main/LICENSE).
 
 ## Roadmap
 - 2024-08-16: Initial Release
