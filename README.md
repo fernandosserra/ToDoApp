@@ -2,12 +2,14 @@
 A simple application to manage tasks
 
 ## Index
-- Introduction
-- Technologies
-- Features
-- Installing
-- Using
-- License
+- [Introduction](#introduction)
+- [Technologies](#technologies)
+- [Features](#features)
+- [Installing](#installing)
+- [Using](#using)
+- [License](#license)
+- [Roadmap](#roadmap)
+- [Screenshots](#screenshots)
 
 ## Introduction
 This is a simple project, made for educational purposes, where the user can track their daily tasks and add them to two specific groups, or view all of them on a single screen.
@@ -36,7 +38,22 @@ This project uses the MIT License.
 - 2024-10-30: Add a new logo and background image
 
 ## Screenshots
-<img src="D:\Projetos-Fernando\Python\ToDoApp\MainPage.png"/>
-<img src="D:\Projetos-Fernando\Python\ToDoApp\Adding_Task.png"/>
-<img src="D:\Projetos-Fernando\Python\ToDoApp\Current_Tasks.png"/>
-<img src="D:\Projetos-Fernando\Python\ToDoApp\Completed_Tasks.png"/>
+ <style>
+        .container {
+            display: flex;
+            justify-content: space-around; /* Distribui espaço uniformemente */
+            align-items: center; /* Alinha verticalmente ao centro */
+            gap: 10px; /* Espaçamento entre as imagens */
+        }
+        .container img {
+            max-width: 100%; /* Garante que as imagens não ultrapassem o tamanho do contêiner */
+            height: auto; /* Mantém a proporção das imagens */
+        }
+    </style>
+
+<div class = "container">
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Main_Page.png?raw=true"/></br>
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Adding_Task.png?raw=true"/></br>
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Current_Tasks.png?raw=true"/></br>
+    <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Completed_Tasks.png?raw=true"/></br>
+</div>
