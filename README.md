@@ -38,20 +38,8 @@ This project uses the MIT License.
 - 2024-10-30: Add a new logo and background image
 
 ## Screenshots
-<style>
-        .container {
-            display: flex;
-            justify-content: space-around; /* Distribui espaço uniformemente */
-            align-items: center; /* Alinha verticalmente ao centro */
-            gap: 10px; /* Espaçamento entre as imagens */
-        }
-        .container img {
-            max-width: 100%; /* Garante que as imagens não ultrapassem o tamanho do contêiner */
-            height: auto; /* Mantém a proporção das imagens */
-        }
-</style>
 
-<div class = "container">
+<div style="display: flex; justify-content: space-around; align-items: center; gap: 10px;">
     <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Main_Page.png?raw=true"/></br>
     <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Adding_Task.png?raw=true"/></br>
     <img src="https://github.com/fernandosserra/ToDoApp/blob/main/Img/Current_Tasks.png?raw=true"/></br>
