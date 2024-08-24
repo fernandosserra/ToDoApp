@@ -1,7 +1,15 @@
-import flet as ft
-import sqlite3
+import flet as ft # Importing main framework
+import sqlite3 # Importing sqlite3 for database purposes
+import os # Importing Os for file management purposes
 
-class ToDo:
+# Some auxiliary variables
+
+folder_path = "C:/Organizeasy/Database" # Path to the database
+database_name = "organizeasy.db" # Name of the database
+complete_path = os.path.join(folder_path, database_name) # Complete path to the database
+
+
+class Organizeasy:
     def __init__(self, Page: ft.Page):
         """
         Initializes a new instance of the ToDo class with the specified Page.
@@ -18,11 +26,15 @@ class ToDo:
         self.Page.window.height = 450
         self.Page.window.resizable = False
         self.Page.window.always_on_top = True
-        self.Page.title = "To-Do App"
+        self.Page.title = "Organizeasy"
         self.task = ''
         self.view = 'all'
-        self.db_execute('CREATE TABLE IF NOT EXISTS tasks (name, status)')
-        self.results = self.db_execute('SELECT * FROM tasks')        
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+            self.db_execute('CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, status TEXT NOT NULL)')
+        else:
+            self.db_execute('CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, status TEXT NOT NULL)')
+        self.results = self.db_execute('SELECT name, status FROM tasks')        
         self.main_Page()
 
     def checked(self, e):
@@ -44,9 +56,9 @@ class ToDo:
             self.db_execute('UPDATE tasks SET status = ? WHERE name = ?', params=["incomplete", label])
 
         if self.view == 'all':
-            self.results = self.db_execute('SELECT * FROM tasks')
+            self.results = self.db_execute('SELECT name, status FROM tasks')
         else:
-            self.results = self.db_execute('SELECT * FROM tasks WHERE status = ?', params=[self.view])
+            self.results = self.db_execute('SELECT name, status FROM tasks WHERE status = ?', params=[self.view])
             
         self.update_task_list()
         self.Page.update()
@@ -65,18 +77,19 @@ class ToDo:
             ft.Container: A container with the specified height and content.
         """
         return ft.Container(
-            height=self.Page.height * 0.8,
+            height = self.Page.height * 0.8,
             content = ft.Column(
-                controls = [
+                controls = [                    
                     ft.Checkbox(
                         label = res[0],
                         on_change = self.checked, 
                         value = True if res[1] == 'complete' else False
                         )
                     for res in self.results if res                    
-                ]
+                ],
             )
         )
+        
 
     def db_execute(self, query, params = []):
         """
@@ -89,7 +102,7 @@ class ToDo:
         Returns:
             list: A list of rows returned by the query.
         """
-        with sqlite3.connect(r'D:\Projetos-Fernando\Python\ToDoApp\Database\todo.db') as conn:
+        with sqlite3.connect(complete_path) as conn:
             cur = conn.cursor()
             cur.execute(query, params)
             conn.commit()
@@ -138,13 +151,25 @@ class ToDo:
         
         if task_name:
             self.db_execute(
-                query='INSERT INTO tasks VALUES (?, ?)',
+                query='INSERT INTO tasks (name, status) VALUES (?, ?)',
                 params=(task_name, status)
                 )
             input_task.value = ''
-            self.results = self.db_execute('SELECT * FROM tasks')
+            self.results = self.db_execute('SELECT name, status FROM tasks')
             self.update_task_list()
-    
+
+        
+    def delete_task(self, e):
+        """
+        Deletes a task from the task list.
+
+        Parameters:
+            e (Event): The event triggered by the control.
+
+        Returns:
+            None
+        """
+
     def tabs_changed(self, e):
         """
         Updates the task list based on the selected tab.
@@ -156,13 +181,13 @@ class ToDo:
             None
         """
         if e.control.selected_index == 0:
-            self.results = self.db_execute('SELECT * FROM tasks')
+            self.results = self.db_execute('SELECT name, status FROM tasks')
             self.view = 'all'
         elif e.control.selected_index == 1:
-            self.results = self.db_execute('SELECT * FROM tasks WHERE status = ?', params=['incomplete'])
+            self.results = self.db_execute('SELECT name, status FROM tasks WHERE status = ?', params=['incomplete'])
             self.view = 'incomplete'
         elif e.control.selected_index == 2:
-            self.results = self.db_execute('SELECT * FROM tasks WHERE status = ?', params=['complete'])
+            self.results = self.db_execute('SELECT name, status FROM tasks WHERE status = ?', params=['complete'])
             self.view = 'complete'
         
         self.update_task_list()
@@ -205,6 +230,7 @@ class ToDo:
         
         tasks = self.tasks_container()
         
+        
         self.Page.add(input_bar, tabs, tasks)
         
-ft.app(target=ToDo)
+ft.app(target=Organizeasy)
