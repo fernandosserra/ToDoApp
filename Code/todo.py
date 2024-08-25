@@ -77,19 +77,27 @@ class Organizeasy:
             ft.Container: A container with the specified height and content.
         """
         return ft.Container(
-            height = self.Page.height * 0.8,
-            content = ft.Column(
-                controls = [                    
-                    ft.Checkbox(
-                        label = res[0],
-                        on_change = self.checked, 
-                        value = True if res[1] == 'complete' else False
-                        )
-                    for res in self.results if res                    
+            height=self.Page.height * 0.8,
+            content=ft.Column(
+                controls=[
+                    ft.Row(
+                        controls=[
+                            ft.Checkbox(
+                                width=250,
+                                label=res[0],
+                                on_change=self.checked,
+                                value=True if res[1] == 'complete' else False
+                            ),
+                            ft.IconButton(
+                            icon=ft.icons.DELETE_OUTLINE_ROUNDED,
+                            on_click=lambda e, task_name=res[0]: self.delete_task(e, task_name)
+                            )
+                        ]
+                    )
+                    for res in self.results if res
                 ],
             )
         )
-        
 
     def db_execute(self, query, params = []):
         """
@@ -157,9 +165,8 @@ class Organizeasy:
             input_task.value = ''
             self.results = self.db_execute('SELECT name, status FROM tasks')
             self.update_task_list()
-
         
-    def delete_task(self, e):
+    def delete_task(self, e,task_name):
         """
         Deletes a task from the task list.
 
@@ -169,6 +176,9 @@ class Organizeasy:
         Returns:
             None
         """
+        self.db_execute('DELETE FROM tasks WHERE name = ?', params=(task_name,))
+        self.results = self.db_execute('SELECT name, status FROM tasks')
+        self.update_task_list()
 
     def tabs_changed(self, e):
         """
