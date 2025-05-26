@@ -1,10 +1,15 @@
 import flet as ft # Importing main framework
 import sqlite3 # Importing sqlite3 for database purposes
 import os # Importing Os for file management purposes
+import platform # For Detecting the OS
 
 # Some auxiliary variables
 
-folder_path = "C:/Organizeasy/Database" # Path to the database
+if platform.system() == "Windows":
+    folder_path = "C:/Organizeasy/Database"
+else:
+    folder_path = os.path.expanduser("~/.organizeasy/database")
+
 database_name = "organizeasy.db" # Name of the database
 complete_path = os.path.join(folder_path, database_name) # Complete path to the database
 
@@ -21,7 +26,7 @@ class Organizeasy:
             None
         """
         self.Page = Page
-        self.Page.bgcolor = ft.colors.WHITE
+        self.Page.bgcolor = "#FFFFFF" # branco
         self.Page.window.width = 350
         self.Page.window.height = 450
         self.Page.window.resizable = False
@@ -89,7 +94,7 @@ class Organizeasy:
                                 value=True if res[1] == 'complete' else False
                             ),
                             ft.IconButton(
-                            icon=ft.icons.DELETE_OUTLINE_ROUNDED,
+                            icon="delete_outline_rounded",
                             on_click=lambda e, task_name=res[0]: self.delete_task(e, task_name)
                             )
                         ]
@@ -222,7 +227,7 @@ class Organizeasy:
         input_bar = ft.Row(
             controls = [input_task,
                         ft.FloatingActionButton(
-                            icon = ft.icons.ADD, 
+                            icon = "add_rounded", 
                                 on_click = lambda e: self.add_task(e, input_task)
                                 )
                         ]
